@@ -1,0 +1,347 @@
+<ons-page id="scanner-page">
+    <ons-toolbar>
+        <div class="center">書籍検索アプリ</div>
+    </ons-toolbar>
+    <div class="scanner-wrapper">
+       <div class="scanner-eye-catch">
+            <ons-icon icon="fa-barcode" size="160px"></ons-icon>
+        </div>
+        <ons-button class="blue scanner-button" id="book-scanner-button" modifier="large--cta">ISBNコードから検索</ons-button>
+        <ons-input id="username" modifier="underbar" placeholder="検索ワードを入力" >　　　　　</ons-input>
+        <br>
+        <br>
+        <ons-button class="red scanner-button" id="book-scanner-button2" modifier="large--cta">キーワード検索する</ons-button>
+    </div>
+
+    <!-- 検索結果の表示 -->
+    <div id="canvas"></div>
+     <div id="number"></div>
+    <br>
+    <img id="image_place" src="#">
+    <br>
+    <br>
+    <div id="content"></div>
+    <br>
+    <div id="main_text"></div>
+    <br>
+    <div id="author"></div>
+
+    <div id="canvas"></div>
+
+    <!-- 10件の検索の表示 -->
+    <br>
+    <br>
+    <img id="image_place2" src="#">
+    <br>
+    <br>
+    <div id="content2"></div>
+    <br>
+    <div id="main_text2"></div>
+    <br>
+    <div id="author2"></div>
+     <div id="canvas"></div>
+
+    <br>
+    <img id="image_place3" src="#">
+    <br>
+    <br>
+    <div id="content3"></div>
+    <br>
+    <div id="main_text3"></div>
+    <br>
+    <div id="author3"></div>
+     <div id="canvas"></div>
+
+    <br>
+    <img id="image_place4" src="#">
+    <br>
+    <br>
+    <div id="content4"></div>
+    <br>
+    <div id="main_text4"></div>
+    <br>
+    <div id="author4"></div>
+    <div id="canvas"></div>
+
+    <br>
+    <img id="image_place5" src="#">
+    <br>
+    <br>
+    <div id="content5"></div>
+    <br>
+    <div id="main_text5"></div>
+    <br>
+    <div id="author5"></div>
+    <div id="canvas"></div>
+
+    <br>
+    <img id="image_place6" src="#">
+    <br>
+    <br>
+    <div id="content6"></div>
+    <br>
+    <div id="main_text6"></div>
+    <br>
+    <div id="author6"></div>
+     <div id="canvas"></div>
+
+    <br>
+    <img id="image_place7" src="#">
+    <br>
+    <br>
+    <div id="content7"></div>
+    <br>
+    <div id="main_text7"></div>
+    <br>
+    <div id="author7"></div>
+    <div id="canvas"></div>
+
+    <br>
+    <img id="image_place8" src="#">
+    <br>
+    <br>
+    <div id="content8"></div>
+    <br>
+    <div id="main_text8"></div>
+    <br>
+    <div id="author8"></div>
+     <div id="canvas"></div>
+
+    <br>
+    <img id="image_place9" src="#">
+    <br>
+    <br>
+    <div id="content9"></div>
+    <br>
+    <div id="main_text9"></div>
+    <br>
+    <div id="author9"></div>
+    <div id="canvas"></div>
+
+    <br>
+    <img id="image_place10" src="#">
+    <br>
+    <br>
+    <div id="content10"></div>
+    <br>
+    <div id="main_text10"></div>
+    <br>
+    <div id="author10"></div>
+    <div id="canvas"></div>
+
+
+<script>
+    const number = document.querySelector('#number');
+    const name = document.querySelector('#username');
+    const img = document.querySelector('#image_place');
+    const main_title = document.querySelector('#content');
+    const main_text = document.querySelector('#main_text');
+    const author = document.querySelector('#author');
+
+    const img2 = document.querySelector('#image_place2');
+    const main_title2 = document.querySelector('#content2');
+    const main_text2 = document.querySelector('#main_text2');
+    const author2 = document.querySelector('#author2');
+
+    const img3 = document.querySelector('#image_place3');
+    const main_title3 = document.querySelector('#content3');
+    const main_text3 = document.querySelector('#main_text3');
+    const author3 = document.querySelector('#author3');
+
+    const img4 = document.querySelector('#image_place4');
+    const main_title4 = document.querySelector('#content4');
+    const main_text4 = document.querySelector('#main_text4');
+    const author4 = document.querySelector('#author4');
+
+
+    const img5 = document.querySelector('#image_place5');
+    const main_title5 = document.querySelector('#content5');
+    const main_text5 = document.querySelector('#main_text5');
+    const author5 = document.querySelector('#author5');
+
+    const img6 = document.querySelector('#image_place6');
+    const main_title6 = document.querySelector('#content6');
+    const main_text6 = document.querySelector('#main_text6');
+    const author6 = document.querySelector('#author6');
+
+    const img7 = document.querySelector('#image_place7');
+    const main_title7 = document.querySelector('#content7');
+    const main_text7 = document.querySelector('#main_text7');
+    const author7 = document.querySelector('#author7');
+
+    const img8 = document.querySelector('#image_place8');
+    const main_title8 = document.querySelector('#content8');
+    const main_text8 = document.querySelector('#main_text8');
+    const author8 = document.querySelector('#author8');
+
+    const img9 = document.querySelector('#image_place9');
+    const main_title9 = document.querySelector('#content9');
+    const main_text9 = document.querySelector('#main_text9');
+    const author9 = document.querySelector('#author9');
+
+    const img10 = document.querySelector('#image_place10');
+    const main_title10 = document.querySelector('#content10');
+    const main_text10 = document.querySelector('#main_text10');
+    const author10 = document.querySelector('#author10');
+
+    
+    let arr_img = [];
+    let arr2_title = [];
+    let arr3_text = [];
+    let arr4_author = [];
+
+    ons.getScriptPage().onInit=function(){
+        document.querySelector('#book-scanner-button').onclick = function() {
+            isbm(name.value);
+        }
+
+        function isbm (code) {
+            $.ajax({
+                url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + code,
+                dataType: 'json',
+            })
+            .done(function(data) {
+                number.innerHTML = '1件の検索結果を表示します'
+                img.src = data.items[0].volumeInfo.imageLinks.smallThumbnail
+                main_title.innerHTML = 'タイトル：' + data.items[0].volumeInfo.title;
+                main_text.innerHTML = 'あらすじ：' +  data.items[0].searchInfo.textSnippet;
+                author.innerHTML = '著者：' + data.items[0].volumeInfo.authors;
+
+                img2.src = '';
+                main_title2.innerHTML = '';
+                main_text2.innerHTML = '';
+                author2.innerHTML = '';
+
+                img3.src = '';
+                main_title3.innerHTML = '';
+                main_text3.innerHTML = '';
+                author3.innerHTML = '';
+
+                img4.src = '';
+                main_title4.innerHTML = '';
+                main_text4.innerHTML = '';
+                author4.innerHTML = '';
+
+                img5.src = '';
+                main_title5.innerHTML = '';
+                main_text5.innerHTML = '';
+                author5.innerHTML = '';
+
+                img6.src = '';
+                main_title6.innerHTML = '';
+                main_text6.innerHTML = '';
+                author6.innerHTML = '';
+
+                img7.src = '';
+                main_title7.innerHTML = '';
+                main_text7.innerHTML = '';
+                author7.innerHTML = '';
+
+                img8.src = '';
+                main_title8.innerHTML = '';
+                main_text8.innerHTML = '';
+                author8.innerHTML = '';
+
+                img9.src = '';
+                main_title9.innerHTML = '';
+                main_text9.innerHTML = '';
+                author9.innerHTML = '';
+
+                img10.src = '';
+                main_title10.innerHTML = '';
+                main_text10.innerHTML = '';
+                author10.innerHTML = '';
+
+                })
+            .fail(function(data) {
+                //受信失敗時
+            })
+        }
+         document.querySelector('#book-scanner-button2').onclick = function() {
+            key(name.value);
+        }
+        function key (keyword) {
+             $.ajax({
+                url: 'https://www.googleapis.com/books/v1/volumes?q=' + keyword,
+                dataType: 'json',
+            })
+            .done(function(data) {
+                arr_img = [];
+                arr2_title = [];
+                arr3_text = [];
+                arr4_author = [];
+                
+
+                for (let i = 0; i < data.items.length; i++) {
+                   arr2_title.push(data.items[i].volumeInfo.title);
+                   arr3_text.push(data.items[i].volumeInfo.description);
+                   arr4_author.push(data.items[i].volumeInfo.authors);
+                }
+                for (let j = 0; j < data.items.length; j++) {
+                  try {
+                      arr_img.push(data.items[j].volumeInfo.    imageLinks.smallThumbnail);
+                      } 
+                       catch (e) {
+                         console.error(e);
+                       }
+                 }
+                console.log(arr_img);
+                number.innerHTML = '10件の検索結果を表示します'
+                img.src = arr_img[0]
+                main_title.innerHTML = 'タイトル：' + arr2_title[0];
+                main_text.innerHTML = 'あらすじ：' + arr3_text[0];
+                author.innerHTML = '著者：' + arr4_author[0];
+
+                img2.src = arr_img[1]
+                main_title2.innerHTML = 'タイトル：' + arr2_title[1];
+                main_text2.innerHTML = 'あらすじ：' + arr3_text[1];
+                author2.innerHTML = '著者：' + arr4_author[1];
+
+                img3.src = arr_img[2]
+                main_title3.innerHTML = 'タイトル：' + arr2_title[2];
+                main_text3.innerHTML = 'あらすじ：' + arr3_text[2];
+                author3.innerHTML = '著者：' + arr4_author[2];
+
+                img4.src = arr_img[3]
+                main_title4.innerHTML = 'タイトル：' + arr2_title[3];
+                main_text4.innerHTML = 'あらすじ：' + arr3_text[3];
+                author4.innerHTML = '著者：' + arr4_author[3];
+
+                img5.src = arr_img[4]
+                main_title5.innerHTML = 'タイトル：' + arr2_title[4];
+                main_text5.innerHTML = 'あらすじ：' + arr3_text[4];
+                author5.innerHTML = '著者：' + arr4_author[4];
+
+                img6.src = arr_img[5]
+                main_title6.innerHTML = 'タイトル：' + arr2_title[5];
+                main_text6.innerHTML = 'あらすじ：' + arr3_text[5];
+                author6.innerHTML = '著者：' + arr4_author[5];
+
+                img7.src = arr_img[6]
+                main_title7.innerHTML = 'タイトル：' + arr2_title[6];
+                main_text7.innerHTML = 'あらすじ：' + arr3_text[6];
+                author7.innerHTML = '著者：' + arr4_author[6];
+
+                img8.src = arr_img[7]
+                main_title8.innerHTML = 'タイトル：' + arr2_title[7];
+                main_text8.innerHTML = 'あらすじ：' + arr3_text[7];
+                author8.innerHTML = '著者：' + arr4_author[7];
+
+                img9.src = arr_img[8]
+                main_title9.innerHTML = 'タイトル：' + arr2_title[8];
+                main_text9.innerHTML = 'あらすじ：' + arr3_text[8];
+                author9.innerHTML = '著者：' + arr4_author[8];
+
+                img10.src = arr_img[9]
+                main_title10.innerHTML = 'タイトル：' + arr2_title[9];
+                main_text10.innerHTML = 'あらすじ：' + arr3_text[9];
+                author10.innerHTML = '著者：' + arr4_author[9];
+                })
+            .fail(function(data) {
+                //受信失敗時
+            })
+        }
+    }
+        
+</script>
+</ons-page>
