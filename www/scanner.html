@@ -191,16 +191,53 @@
     let arr4_author = [];
 
     ons.getScriptPage().onInit=function(){
+         document.querySelector('.scanner-eye-catch').onclick = function() {
+            scan();
+        }
+             let options = {
+                preferFrontCamera : false,
+                showFlipCameraButton : true,
+                showTorchButton : false,
+                torchOn: true, // Android only
+                saveHistory: false, // Android only
+                prompt : "スキャンエリアの中にバーコードを入れてください", // Android
+                resultDisplayDuration: 500, // Android only
+                // formats : "all",//QR_CODE,EAN_13,CODE_39 
+                formats : "QR_CODE,EAN_8,EAN_13,CODE_39", 
+                orientation : "unset", // Android only (portrait|landscape)
+                disableAnimations : true, // iOS
+                disableSuccessBeep: false // iOS and Android
+        }
+        function onSuccess (result) {
+            isbm(result.text);
+            alert("結果: " + result.text + "\n" +
+                "バーコードの種類: " + result.format + "\n" +
+                "スキャンが中断されたかどうか: " + result.cancelled);
+        }
+        function onError (error) {
+            alert("スキャン失敗: " + error);
+        }
+        function scan() {
+            cordova.plugins.barcodeScanner.scan(
+                onSuccess,
+                onError,
+                options
+            );
+        }
+
+
         document.querySelector('#book-scanner-button').onclick = function() {
             isbm(name.value);
         }
 
         function isbm (code) {
+           
             $.ajax({
                 url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + code,
                 dataType: 'json',
             })
             .done(function(data) {
+                
                 number.innerHTML = '1件の検索結果を表示します'
                 img.src = data.items[0].volumeInfo.imageLinks.smallThumbnail
                 main_title.innerHTML = 'タイトル：' + data.items[0].volumeInfo.title;
@@ -340,6 +377,9 @@
             .fail(function(data) {
                 //受信失敗時
             })
+        }
+        function error_data(code){
+            
         }
     }
         
