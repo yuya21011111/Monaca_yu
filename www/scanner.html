@@ -131,6 +131,10 @@
 
 
 <script>
+    const book_scanner_button = document.querySelector('#book-scanner-button');
+
+    const book_scanner_button2 = document.querySelector('#book-scanner-button2');
+
     const number = document.querySelector('#number');
     const name = document.querySelector('#username');
     const img = document.querySelector('#image_place');
@@ -184,7 +188,8 @@
     const main_text10 = document.querySelector('#main_text10');
     const author10 = document.querySelector('#author10');
 
-    
+    let url_isbn = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
+    let url_key = 'https://www.googleapis.com/books/v1/volumes?q=';
     let arr_img = [];
     let arr2_title = [];
     let arr3_text = [];
@@ -209,7 +214,7 @@
                 disableSuccessBeep: false // iOS and Android
         }
         function onSuccess (result) {
-            isbm(result.text);
+            key(url_isbn + result.text,result.text);
             alert("結果: " + result.text + "\n" +
                 "バーコードの種類: " + result.format + "\n" +
                 "スキャンが中断されたかどうか: " + result.cancelled);
@@ -226,18 +231,27 @@
         }
 
 
-        document.querySelector('#book-scanner-button').onclick = function() {
-            isbm(name.value);
+        book_scanner_button.onclick = function() {
+            book_scanner_button.disabled = true;
+            key(url_isbn + name.value,name.value);
         }
 
-        function isbm (code) {
-           
-            $.ajax({
-                url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + code,
+         book_scanner_button2.onclick = function() {
+             book_scanner_button2.disabled = true;
+             key(url_key + name.value,name.value);
+        }
+        function key (keyword,value) {
+            if (value == '') {
+                error();
+            }
+            else {
+             $.ajax({
+                url: keyword,
                 dataType: 'json',
             })
             .done(function(data) {
-                
+                console.log(data);
+            if (data.items.length == 1){
                 number.innerHTML = '1件の検索結果を表示します'
                 img.src = data.items[0].volumeInfo.imageLinks.smallThumbnail
                 main_title.innerHTML = 'タイトル：' + data.items[0].volumeInfo.title;
@@ -289,20 +303,9 @@
                 main_text10.innerHTML = '';
                 author10.innerHTML = '';
 
-                })
-            .fail(function(data) {
-                //受信失敗時
-            })
-        }
-         document.querySelector('#book-scanner-button2').onclick = function() {
-            key(name.value);
-        }
-        function key (keyword) {
-             $.ajax({
-                url: 'https://www.googleapis.com/books/v1/volumes?q=' + keyword,
-                dataType: 'json',
-            })
-            .done(function(data) {
+                button_time_reset();
+            }
+            else {
                 arr_img = [];
                 arr2_title = [];
                 arr3_text = [];
@@ -373,13 +376,32 @@
                 main_title10.innerHTML = 'タイトル：' + arr2_title[9];
                 main_text10.innerHTML = 'あらすじ：' + arr3_text[9];
                 author10.innerHTML = '著者：' + arr4_author[9];
+                
+                button_time_reset();
+            }
+            
                 })
             .fail(function(data) {
                 //受信失敗時
             })
+            }
         }
-        function error_data(code){
-            
+        function button_time_reset () {
+           book_scanner_button.disabled = false;
+           book_scanner_button2.disabled = false;
+        }
+
+        function error() {
+            const flag = true;
+         try {
+              if (flag) {
+                  book_scanner_button.disabled = false;
+                  book_scanner_button2.disabled = false;
+                  alert('データがありません。"\n"入力をキャンセルします。');
+               }
+                } catch (e) {
+                     console.log(e.message);
+            }     
         }
     }
         
