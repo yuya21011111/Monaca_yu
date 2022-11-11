@@ -232,16 +232,26 @@
 
 
         book_scanner_button.onclick = function() {
-            book_scanner_button.disabled = true;
-            key(url_isbn + name.value,name.value);
+            let name_set = name.value
+            alert(name_set)
+            if (!isNaN(name_set)){
+                book_scanner_button.disabled = true;
+                key(url_isbn + name.value,name_set);
+            }
+            else{
+                error();
+            }
         }
 
          book_scanner_button2.onclick = function() {
+             let name_set = name.value
              book_scanner_button2.disabled = true;
-             key(url_key + name.value,name.value);
+             key(url_key + name.value,name_set);
         }
         function key (keyword,value) {
-            if (value == '') {
+            let value_name = value;
+            if (value_name == '') {
+            // valueにデータがない場合は強制終了
                 error();
             }
             else {
@@ -250,6 +260,7 @@
                 dataType: 'json',
             })
             .done(function(data) {
+              
                 console.log(data);
             if (data.items.length == 1){
                 number.innerHTML = '1件の検索結果を表示します'
@@ -387,17 +398,70 @@
             }
         }
         function button_time_reset () {
+            // 連続押しを規制
            book_scanner_button.disabled = false;
            book_scanner_button2.disabled = false;
         }
 
         function error() {
+            // アプリに警告画面を出して終了させる。
             const flag = true;
          try {
-              if (flag) {
-                  book_scanner_button.disabled = false;
-                  book_scanner_button2.disabled = false;
-                  alert('データがありません。"\n"入力をキャンセルします。');
+            if (flag) {
+                book_scanner_button.disabled = false;
+                book_scanner_button2.disabled = false;
+                alert('データが無いもしくはISBNに数値以外の入力を感知。"\n"入力をキャンセルします。');
+                number.innerHTML = '0件の検索結果を表示します'
+                img.src = ''
+                main_title.innerHTML = ''
+                main_text.innerHTML = ''
+                author.innerHTML = ''
+
+                img2.src = '';
+                main_title2.innerHTML = '';
+                main_text2.innerHTML = '';
+                author2.innerHTML = '';
+
+                img3.src = '';
+                main_title3.innerHTML = '';
+                main_text3.innerHTML = '';
+                author3.innerHTML = '';
+
+                img4.src = '';
+                main_title4.innerHTML = '';
+                main_text4.innerHTML = '';
+                author4.innerHTML = '';
+
+                img5.src = '';
+                main_title5.innerHTML = '';
+                main_text5.innerHTML = '';
+                author5.innerHTML = '';
+
+                img6.src = '';
+                main_title6.innerHTML = '';
+                main_text6.innerHTML = '';
+                author6.innerHTML = '';
+
+                img7.src = '';
+                main_title7.innerHTML = '';
+                main_text7.innerHTML = '';
+                author7.innerHTML = '';
+
+                img8.src = '';
+                main_title8.innerHTML = '';
+                main_text8.innerHTML = '';
+                author8.innerHTML = '';
+
+                img9.src = '';
+                main_title9.innerHTML = '';
+                main_text9.innerHTML = '';
+                author9.innerHTML = '';
+
+                img10.src = '';
+                main_title10.innerHTML = '';
+                main_text10.innerHTML = '';
+                author10.innerHTML = '';
+
                }
                 } catch (e) {
                      console.log(e.message);
