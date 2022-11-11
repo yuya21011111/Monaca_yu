@@ -232,11 +232,13 @@
 
 
         book_scanner_button.onclick = function() {
-            let name_set = name.value
-            alert(name_set)
-            if (!isNaN(name_set)){
+            let search_keyword = name.value
+            let num = search_keyword.toString().length;
+            alert(num);
+            alert(search_keyword)
+            if (!isNaN(search_keyword) && ('10' == num || '13' == num)){
                 book_scanner_button.disabled = true;
-                key(url_isbn + name.value,name_set);
+                key(url_isbn + search_keyword,search_keyword);
             }
             else{
                 error();
@@ -244,13 +246,13 @@
         }
 
          book_scanner_button2.onclick = function() {
-             let name_set = name.value
+             let search_keyword = name.value
              book_scanner_button2.disabled = true;
-             key(url_key + name.value,name_set);
+             key(url_key + search_keyword,search_keyword);
         }
-        function key (keyword,value) {
-            let value_name = value;
-            if (value_name == '') {
+        function key (keyword,search_keyword) {
+            let search_keyword_name = search_keyword;
+            if (search_keyword_name == '') {
             // valueにデータがない場合は強制終了
                 error();
             }
@@ -410,7 +412,7 @@
             if (flag) {
                 book_scanner_button.disabled = false;
                 book_scanner_button2.disabled = false;
-                alert('データが無いもしくはISBNに数値以外の入力を感知。"\n"入力をキャンセルします。');
+                alert('データが存在しない、"\n"ISBNに数値以外の入力、"\n"10桁、13桁以外の入力を感知しました。"\n"入力をキャンセルします。');
                 number.innerHTML = '0件の検索結果を表示します'
                 img.src = ''
                 main_title.innerHTML = ''
