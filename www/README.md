@@ -1,4 +1,9 @@
-# Welcome to Onsen UI 2!
+使用技術
+・HTML/CSS,JavaScript,jQuery(3.6.0),Cordova(PhoneGap)Loader1.0.4,Ajax
 
-This template is using Onsen UI, a HTML5 framework that is focusing on the speed and ease of use.
-For details, please check out [Onsen UI Website](http://onsenui.io) and [the documents](http://onsenui.io/v2/).
+工夫した所
+・Ajax通信を使用してGoogle Books APIsを使うことで画像、タイトル、あらすじ、著名の情報を一括で表示できるようにしました。
+
+
+
+
