@@ -234,8 +234,8 @@
         book_scanner_button.onclick = function() {
             let search_keyword = name.value
             let num = search_keyword.toString().length;
-            alert(num);
-            alert(search_keyword)
+            // alert(num);
+            // alert(search_keyword)
             if (!isNaN(search_keyword) && ('10' == num || '13' == num)){
                 book_scanner_button.disabled = true;
                 key(url_isbn + search_keyword,search_keyword);
@@ -324,21 +324,31 @@
                 arr3_text = [];
                 arr4_author = [];
                 
-
                 for (let i = 0; i < data.items.length; i++) {
-                   arr2_title.push(data.items[i].volumeInfo.title);
-                   arr3_text.push(data.items[i].volumeInfo.description);
-                   arr4_author.push(data.items[i].volumeInfo.authors);
-                }
-                for (let j = 0; j < data.items.length; j++) {
                   try {
-                      arr_img.push(data.items[j].volumeInfo.    imageLinks.smallThumbnail);
+                       arr_img.push(data.items[i].volumeInfo.imageLinks.smallThumbnail);
+                       arr2_title.push(data.items[i].volumeInfo.title);
+                       arr3_text.push(data.items[i].volumeInfo.description);
+                       arr4_author.push(data.items[i].volumeInfo.authors);
                       } 
                        catch (e) {
                          console.error(e);
-                       }
+                    }
                  }
-                console.log(arr_img);
+                for (let j = 0; j < data.items.length; j++){
+                    if (arr_img[j] == null){
+                        arr_img[j] = 'img/no.jpg';
+                    }
+                    if (arr2_title[j] == null){
+                        arr2_title[j] = '無し';
+                    }
+                    if (arr3_text[j] == null){
+                        arr3_text[j] = '無し';
+                    }
+                    if (arr4_author[j] == null){
+                        arr4_author[j] = '無し';
+                    }
+                }
                 number.innerHTML = '10件の検索結果を表示します'
                 img.src = arr_img[0]
                 main_title.innerHTML = 'タイトル：' + arr2_title[0];
@@ -412,7 +422,7 @@
             if (flag) {
                 book_scanner_button.disabled = false;
                 book_scanner_button2.disabled = false;
-                alert('データが存在しない、"\n"ISBNに数値以外の入力、"\n"10桁、13桁以外の入力を感知しました。"\n"入力をキャンセルします。');
+                alert('データが存在しないまたは"\n"ISBNに数値以外の入力または"\n"10桁、13桁以外の入力を感知しました。"\n"入力をキャンセルします。');
                 number.innerHTML = '0件の検索結果を表示します'
                 img.src = ''
                 main_title.innerHTML = ''
